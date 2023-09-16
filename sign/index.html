@@ -10,7 +10,7 @@
 
 <body>
     <script src="./index.js"></script>
-    
+
     <div>
         <button onclick="showLoginForm()">SIGN IN</button>
         <button onclick="showSignUpForm()">SIGN UP</button>
@@ -34,19 +34,23 @@
 
     <div id="signUp-form" style="display: none;">
         <h1>Sign Up</h1>
-        <form method="post">
+        <form method="post" onsubmit="validateSignUpForm(event)">
             <label>FirstName
-                <input type="text" name="firstName" placeholder="FirstName" required="required" /></label>
+                <input type="text" name="firstName" id="firstName-sUp" placeholder="FirstName"
+                    required="required" /></label>
             <label>LastName
-                <input type="text" name="lastName" placeholder="LastName" required="required" /></label>
+                <input type="text" name="lastName" id="lastName-sUp" placeholder="LastName"
+                    required="required" /></label>
             <label>Email
-                <input type="email" name="email" placeholder="Email" required="required" /></label>
+                <input type="email" name="email" id="email-sUp" placeholder="Email" required="required" /></label>
             <label>Phone
-                <input type="telephone" name="phone" placeholder="Phone" required="required" /></label>
+                <input type="telephone" name="phone" id="phone-sUp" placeholder="Phone" required="required" /></label>
             <label>Username
-                <input type="text" name="userName" placeholder="Username" required="required" /></label>
+                <input type="text" name="userName" id="userName-sUp" placeholder="Username"
+                    required="required" /></label>
             <label>Password
-                <input type="password" name="password" placeholder="Password" required="required" /></label>
+                <input type="password" name="password" id="password-sUp" placeholder="Password"
+                    required="required" /></label>
             <button type="submit" class="btn-register">Register</button>
         </form>
     </div>
