@@ -1,0 +1,19 @@
+{
+  "name": "blogs",
+  "version": "1.0.0",
+  "description": "frontend project for blog using html/css/js",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fatenkh7/CODSOFT-T1-Frontend.git"
+  },
+  "author": "Faten khoder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fatenkh7/CODSOFT-T1-Frontend/issues"
+  },
+  "homepage": "https://github.com/Fatenkh7/CODSOFT-T1-Frontend#readme"
+}

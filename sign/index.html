@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <script>
+        function showLoginForm() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("signUp-form").style.display = "none";
+        }
+
+        function showSignUpForm() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("signUp-form").style.display = "block";
+        }
+
+        function validateLoginForm(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            var email = document.getElementById("email-l").value;
+            var password = document.getElementById("password-l").value;
+            var responseMessage = document.getElementById("responseMessage");
+
+            console.log(email, password)
+            if (!email || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            // Create a FormData object to send the form data
+            var formData = new FormData();
+            formData.append("email", email);
+            formData.append("password", password);
+
+            // Make an asynchronous POST request to the server
+            fetch("https://blog-backend-6b5y.onrender.com/user/login", {
+                method: "POST",
+                body: formData,
+            })
+                .then(response => {
+                    console.log("Server Response:", response);
+                    return response.json();
+                })
+                .then(data => {
+                    // Check if the login was successful
+                    console.log(data)
+                    if (data.success) {
+                        alert("Login successful");
+                    } else {
+                        alert("Login failed: " + data.message);
+                        showLoginForm();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred during login.");
+                });
+        }
+
+    </script>
+
+    <div>
+        <button onclick="showLoginForm()">SIGN IN</button>
+        <button onclick="showSignUpForm()">SIGN UP</button>
+    </div>
+
+    <div id="login-form" style="display: none;">
+        <h1>Login</h1>
+        <form method="post" action="../sideBar/homePage/index.html" onsubmit="return validateLoginForm(event)">
+            <label>Email
+                <input type="email" name="email" id="email-l" class="email-login" placeholder="Email"
+                    required="required" /></label>
+            <label>Password
+                <input type="password" name="password" id="password-l" class="password-login" placeholder="Password"
+                    required="required" /></label>
+            <button type="submit" class="btn-login">Let me in.</button>
+            <div id="responseMessage"></div>
+        </form>
+    </div>
+
+    <div id="signUp-form" style="display: none;">
+        <h1>Sign Up</h1>
+        <form method="post">
+            <label>FirstName
+                <input type="text" name="firstName" placeholder="FirstName" required="required" /></label>
+            <label>LastName
+                <input type="text" name="lastName" placeholder="LastName" required="required" /></label>
+            <label>Email
+                <input type="email" name="email" placeholder="Email" required="required" /></label>
+            <label>Phone
+                <input type="telephone" name="phone" placeholder="Phone" required="required" /></label>
+            <label>Username
+                <input type="text" name="userName" placeholder="Username" required="required" /></label>
+            <label>Password
+                <input type="password" name="password" placeholder="Password" required="required" /></label>
+            <button type="submit" class="btn-register">Register</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
