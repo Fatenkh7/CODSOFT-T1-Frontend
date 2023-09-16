@@ -9,50 +9,8 @@
 </head>
 
 <body>
-    <script>
-        function showLoginForm() {
-            document.getElementById("login-form").style.display = "block";
-            document.getElementById("signUp-form").style.display = "none";
-        }
-
-        function showSignUpForm() {
-            document.getElementById("login-form").style.display = "none";
-            document.getElementById("signUp-form").style.display = "block";
-        }
-
-        async function validateLoginForm(event) {
-            event.preventDefault();
-
-            try {
-                var email = document.getElementById("email-l").value.trim();
-                var password = document.getElementById("password-l").value.trim();
-
-                if (!email || !password) {
-                    alert("Please fill in all fields.");
-                    return;
-                }
-
-                const response = await fetch("https://blog-backend-6b5y.onrender.com/user/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
-
-                if (response.ok) {
-                    const responseData = await response.json();
-                    console.log(responseData.message);
-                } else {
-                    console.log("Login failed");
-                }
-            } catch (error) {
-                console.error(error.message);
-            }
-        }
-
-    </script>
-
+    <script src="./index.js"></script>
+    
     <div>
         <button onclick="showLoginForm()">SIGN IN</button>
         <button onclick="showSignUpForm()">SIGN UP</button>
@@ -69,7 +27,7 @@
                 <input type="password" name="password" id="password-l" class="password-login" placeholder="Password"
                     required="required" />
             </label>
-            <button type="submit" class="btn-login">Let me in.</button>
+            <button type="submit" class="btn-login">Login</button>
             <div id="responseMessage"></div>
         </form>
     </div>
