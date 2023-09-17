@@ -8,13 +8,29 @@
 </head>
 
 <body>
-    <script> function logout() {
-            localStorage.removeItem("auth-token");
-            window.location.href = "../index.html"
+    <script>
+        async function checkAuthentication() {
+            const token = localStorage.getItem("auth-token");
+            if (!token) {
+                window.location.href = "access-denied.html";
+                return;
+            }
+            console.log("Token exists:", token);
+
+            function logout() {
+                localStorage.removeItem("auth-token");
+                window.location.href = "../index.html";
+            }
+
+            document.getElementById("logout-btn").addEventListener("click", logout);
         }
+
+        // Run the authentication check when the page loads
+        window.onload = checkAuthentication;
     </script>
-    <button onclick="logout()">LOGOUT</button>
-    welcome to the side bar
+
+    <button id="logout-btn">LOGOUT</button>
+    <p>Welcome to the side bar</p>
 </body>
 
 </html>
