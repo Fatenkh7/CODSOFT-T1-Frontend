@@ -25,7 +25,7 @@ async function validateLoginForm(event) {
             body: JSON.stringify({ email, password }),
         });
 
-        if (response) {
+        if (response.ok) {
             // Access the Authorization header to get the token
             const authHeader = response.headers.get("Authorization");
             if (authHeader) {
@@ -45,8 +45,12 @@ async function validateLoginForm(event) {
                 window.location.href = "../sideBar/index.html";
             }
         } else {
-            // Handle the case where the login request failed
-            window.alert("Login failed");
+            const errorResponseData = await response.json();
+            if (errorResponseData && errorResponseData.message) {
+                alert(errorResponseData.message);
+            } else {
+                window.alert("Login failed" + "\n " + "Something wrong!");
+            }
         }
     } catch (error) {
         alert(error.message);
@@ -58,12 +62,12 @@ async function validateSignUpForm(event) {
     event.preventDefault();
 
     try {
-        var firstName = await document.getElementById("firstName-sUp").value.trim();
-        var lastName = await document.getElementById("lastName-sUp").value.trim();
-        var email = await document.getElementById("email-sUp").value.trim();
-        var phone = await document.getElementById("phone-sUp").value.trim();
-        var userName = await document.getElementById("userName-sUp").value.trim();
-        var password = await document.getElementById("password-sUp").value.trim();
+        var firstName = document.getElementById("firstName-sUp").value.trim();
+        var lastName = document.getElementById("lastName-sUp").value.trim();
+        var email = document.getElementById("email-sUp").value.trim();
+        var phone = document.getElementById("phone-sUp").value.trim();
+        var userName = document.getElementById("userName-sUp").value.trim();
+        var password = document.getElementById("password-sUp").value.trim();
 
         if (!email || !password || !firstName || !lastName || !phone || !userName) {
             alert("Please fill in all fields.");
@@ -78,32 +82,35 @@ async function validateSignUpForm(event) {
             body: JSON.stringify({ firstName, lastName, phone, userName, email, password }),
         });
 
-        if (response) {
+        if (response.ok) {
+            const responseData = await response.json();
+            const message = responseData.message;
+            const additionalInfo = "Welcome, " + responseData.newUser.firstName + " " + responseData.newUser.lastName + "!";
+            const fullMessage = message + "\n" + additionalInfo;
+
+            window.alert(fullMessage);
+
+            // Check if there's an Authorization header
             const authHeader = response.headers.get("Authorization");
             if (authHeader) {
                 const token = authHeader.split(" ")[1];
 
                 // Save the token in local storage
                 localStorage.setItem("auth-token", token);
-
-                const responseData = await response.json();
-                const message = responseData.message;
-                const additionalInfo = "Welcome, " + responseData.newUser.firstName + " " + responseData.newUser.lastName + "!";
-                const fullMessage = message + "\n" + additionalInfo;
-
-                window.alert(fullMessage);
-                window.location.href = "../sideBar/index.html";
             }
+
+            window.location.href = "../sideBar/index.html";
         } else {
             const errorResponseData = await response.json();
             if (errorResponseData && errorResponseData.message) {
                 alert(errorResponseData.message);
             } else {
-                window.alert("Registration failed");
+                window.alert("Registration failed!" + "\n " + "Something wrong!");
             }
         }
     } catch (error) {
         window.alert(error.message);
     }
 }
+
 
