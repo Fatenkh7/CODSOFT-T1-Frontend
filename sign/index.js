@@ -10,16 +10,13 @@ function showSignUpForm() {
 
 async function validateLoginForm(event) {
     event.preventDefault();
-
     try {
         var email = document.getElementById("email-l").value.trim();
         var password = document.getElementById("password-l").value.trim();
-
         if (!email || !password) {
             alert("Please fill in all fields.");
             return;
         }
-
         const response = await fetch("https://blog-backend-6b5y.onrender.com/user/login", {
             method: "POST",
             headers: {
@@ -28,21 +25,34 @@ async function validateLoginForm(event) {
             body: JSON.stringify({ email, password }),
         });
 
-        if (response.ok) {
-            const responseData = await response.json();
-            const message = responseData.message;
-            const additionalInfo = "Welcome, " + responseData.user.firstName + " " + responseData.user.lastName + "!";
-            const fullMessage = message + "\n" + additionalInfo;
+        if (response) {
+            // Access the Authorization header to get the token
+            const authHeader = response.headers.get("Authorization");
+            if (authHeader) {
+                const token = authHeader.split(" ")[1];
 
-            window.alert(fullMessage);
-            window.location.href = "../sideBar/homePage/index.html";
+                // Save the token in local storage
+                localStorage.setItem("auth-token", token);
+
+                const responseData = await response.json();
+
+                const message = responseData.message;
+                const additionalInfo = "Welcome, " + responseData.user.firstName + " " + responseData.user.lastName + "!";
+                const fullMessage = message + "\n" + additionalInfo;
+
+                window.alert(fullMessage);
+
+                window.location.href = "../sideBar/index.html";
+            }
         } else {
+            // Handle the case where the login request failed
             window.alert("Login failed");
         }
     } catch (error) {
         alert(error.message);
     }
 }
+
 
 async function validateSignUpForm(event) {
     event.preventDefault();
@@ -68,16 +78,22 @@ async function validateSignUpForm(event) {
             body: JSON.stringify({ firstName, lastName, phone, userName, email, password }),
         });
 
-        if (response.ok) {
-            const responseData = await response.json();
-            // console.log(response, "ressssssss")
-            // console.log(responseData, "resdataaaaaaa")
-            const message = responseData.message;
-            const additionalInfo = "Welcome, " + responseData.newUser.firstName + " " + responseData.newUser.lastName + "!";
-            const fullMessage = message + "\n" + additionalInfo;
+        if (response) {
+            const authHeader = response.headers.get("Authorization");
+            if (authHeader) {
+                const token = authHeader.split(" ")[1];
 
-            window.alert(fullMessage);
-            window.location.href = "../sideBar/homePage/index.html";
+                // Save the token in local storage
+                localStorage.setItem("auth-token", token);
+
+                const responseData = await response.json();
+                const message = responseData.message;
+                const additionalInfo = "Welcome, " + responseData.newUser.firstName + " " + responseData.newUser.lastName + "!";
+                const fullMessage = message + "\n" + additionalInfo;
+
+                window.alert(fullMessage);
+                window.location.href = "../sideBar/index.html";
+            }
         } else {
             const errorResponseData = await response.json();
             if (errorResponseData && errorResponseData.message) {
@@ -90,3 +106,4 @@ async function validateSignUpForm(event) {
         window.alert(error.message);
     }
 }
+
