@@ -1,12 +1,17 @@
 function showLoginForm() {
     document.getElementById("login-form").style.display = "block";
     document.getElementById("signUp-form").style.display = "none";
+    document.getElementById("btn-rg").style.display = "block";
+    document.getElementById("btn-lg").style.display = "none";
 }
 
 function showSignUpForm() {
     document.getElementById("login-form").style.display = "none";
     document.getElementById("signUp-form").style.display = "block";
+    document.getElementById("btn-rg").style.display = "none";
+    document.getElementById("btn-lg").style.display = "block";
 }
+
 
 async function validateLoginForm(event) {
     event.preventDefault();
