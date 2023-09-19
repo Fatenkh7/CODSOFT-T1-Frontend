@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const data = await response.json();
+        console.log("dataaaa", data)
 
         if (data.success && data.data.length > 0) {
             data.data.forEach((blog) => {

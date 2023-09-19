@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contact-us</title>
+    <link rel="stylesheet" href="./index.css" />
+    <title>Contact-US</title>
 </head>
+
 <body>
-    contact us
+    <script src="./index.js">
+    </script>
+    <div class="container">
+        <div class="sidebar" style="display: none;">
+            <h1>BLOGS</h1>
+            <ul>
+                <li><a href="../homePage/index.html">Home</a></li>
+                <li><a href="../blogs/index.html">Blogs</a></li>
+                <li><a href="../posts/index.html">Posts</a></li>
+                <li><a href="../pages/index.html">Pages</a></li>
+                <li><a href="./index.html">Contact</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logout-btn">LOGOUT</button>
+            </div>
+
+        </div>
+        <div class="content" style="margin-left: 0;">
+            <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
+            <h1>Contact-US</h1>
+            <p>Welcome to the Contact us page</p>
+            <p>This is the main content of the page. It will fill the remaining space next to the sidebar.</p>
+        </div>
+    </div>
 </body>
+
 </html>

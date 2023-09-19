@@ -4,11 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
     <title>Posts</title>
 </head>
 
 <body>
-    <h1>Posts</h1>
+    <script src="./index.js">
+    </script>
+    <div class="main-container">
+        <div class="sidebar" style="display: none;">
+            <h1>BLOGS</h1>
+            <ul>
+                <li><a href="../homePage/index.html">Home</a></li>
+                <li><a href="../blogs/index.html">Blogs</a></li>
+                <li><a href="./index.html">Posts</a></li>
+                <li><a href="../pages/index.html">Pages</a></li>
+                <li><a href="../contactUs/index.html">Contact</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logout-btn">LOGOUT</button>
+            </div>
+
+        </div>
+        <div class="content" style="margin-left: 0;">
+            <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
+            <div class="blog-entry">
+                <h1>List of Blogs</h1>
+                <div class="container" id="blog-list"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

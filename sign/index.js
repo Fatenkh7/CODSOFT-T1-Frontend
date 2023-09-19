@@ -40,6 +40,7 @@ async function validateLoginForm(event) {
                 localStorage.setItem("auth-token", token);
 
                 const responseData = await response.json();
+                localStorage.setItem("user-id", responseData.user._id);
 
                 const message = responseData.message;
                 const additionalInfo = "Welcome, " + responseData.user.firstName + " " + responseData.user.lastName + "!";
