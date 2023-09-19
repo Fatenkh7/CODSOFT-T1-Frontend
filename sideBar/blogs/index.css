@@ -1,0 +1,70 @@
+/* Style for each blog entry card */
+
+body {
+    background-color: #eee;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: end;
+}
+
+.card {
+    width: 300px;
+    /* Reduce the width */
+    height: auto;
+    /* Allow the height to adjust based on content */
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+    /* Reduce the padding */
+}
+
+.card h2 {
+    font-size: 18px;
+    /* Reduce the font size */
+    font-weight: bold;
+    margin-top: 9px;
+    /* Reduce the margin */
+}
+
+.card p {
+    font-size: 14px;
+    /* Reduce the font size */
+    margin-bottom: 8px;
+    /* Reduce the margin */
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    /* Allow the height to adjust based on the image */
+    display: block;
+    margin: 0 auto;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .container {
+        display: flex;
+
+    }
+}

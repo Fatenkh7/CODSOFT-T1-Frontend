@@ -4,11 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
     <title>Document</title>
 </head>
 
 <body>
     <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+            const toggleBtn = document.querySelector('.toggle-btn');
+
+            if (sidebar.style.display === 'none' || sidebar.style.display === '') {
+                sidebar.style.display = 'block';
+                content.style.marginLeft = '262px';
+                toggleBtn.innerText = 'Close Sidebar';
+
+            } else {
+                sidebar.style.display = 'none';
+                content.style.marginLeft = '0';
+                toggleBtn.innerText = 'Open Sidebar';
+            }
+        }
+
         async function checkAuthentication() {
             const token = localStorage.getItem("auth-token");
             if (!token) {
@@ -25,12 +43,32 @@
             document.getElementById("logout-btn").addEventListener("click", logout);
         }
 
+
         // Run the authentication check when the page loads
         window.onload = checkAuthentication;
     </script>
+    <div class="container">
+        <div class="sidebar" style="display: none;">
+            <h1>BLOGS</h1>
+            <ul>
+                <li><a href="./homePage/index.html">Home</a></li>
+                <li><a href="./blogs/index.html">Blogs</a></li>
+                <li><a href="./posts/index.html">Posts</a></li>
+                <li><a href="./pages/index.html">Pages</a></li>
+                <li><a href="./contactUs/index.html">Contact</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logout-btn">LOGOUT</button>
+            </div>
 
-    <button id="logout-btn">LOGOUT</button>
-    <p>Welcome to the side bar</p>
+        </div>
+        <div class="content" style="margin-left: 0;">
+            <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
+            <h1>Main Content</h1>
+            <p>Welcome to the side bar</p>
+            <p>This is the main content of the page. It will fill the remaining space next to the sidebar.</p>
+        </div>
+    </div>
 </body>
 
 </html>
