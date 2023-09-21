@@ -1,3 +1,4 @@
+/* Reset styles */
 body,
 h2,
 p {
@@ -5,10 +6,12 @@ p {
     padding: 0;
 }
 
+/* Body styles */
 body {
     background-color: #eee;
 }
 
+/* Sidebar styles */
 .sidebar {
     height: 100%;
     width: 250px;
@@ -22,14 +25,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
 }
 
-
+/* Sidebar header styles */
 .sidebar h1 {
     text-align: center;
 }
 
+/* Sidebar menu styles */
 .sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -38,7 +41,6 @@ body {
 .sidebar ul li {
     padding: 10px 0;
     text-align: center;
-
 }
 
 .sidebar ul li a {
@@ -57,18 +59,20 @@ body {
     margin-right: 15px;
 }
 
+/* Sidebar footer styles */
 .sidebar-footer {
     text-align: center;
     padding: 10px;
 }
 
-
+/* Content styles */
 .content {
-    /* margin-left: 250px; */
+    margin-left: 250px;
+    /* Adjust content margin to accommodate sidebar */
     padding: 20px;
 }
 
-
+/* Toggle button styles */
 .toggle-btn {
     background-color: #2c0452;
     color: #fff;
@@ -78,9 +82,9 @@ body {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-
 }
 
+/* Logout button styles */
 #logout-btn {
     background-color: #370664;
     color: #fff;
@@ -93,57 +97,90 @@ body {
     transition: background-color 0.3s ease;
 }
 
+/* Button hover effect */
 .toggle-btn:hover,
 #logout-btn:hover {
     background-color: #490688;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Style for each blog entry card */
-.blog-entry {
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* Blog entry styles */
+.card {
+    width: 300px;
+    /* Reduce the width */
+    height: auto;
+    /* Allow the height to adjust based on content */
+    box-sizing: border-box;
+    background: #fff;
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 16px;
-    padding: 16px;
-    background-color: #fff;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: calc(50% - 32px);
-    /* 50% width with margin adjustment */
-    box-sizing: border-box;
-    /* Include padding and border in width calculation */
+    justify-content: flex-start;
+    padding: 10px;
 }
 
-/* Style for the blog title within the card */
-.blog-entry h2 {
-    font-size: 24px;
+/* Blog entry title styles */
+.card h2 {
+    font-size: 18px;
+    /* Reduce the font size */
     font-weight: bold;
+    margin-top: 9px;
+    /* Reduce the margin */
+}
+
+.card p {
+    font-size: 14px;
+    /* Reduce the font size */
     margin-bottom: 8px;
+    /* Reduce the margin */
 }
 
-/* Style for the blog description within the card */
-.blog-entry p {
-    font-size: 16px;
-    margin-bottom: 12px;
-}
-
-/* Style for the blog image within the card */
-.blog-entry img {
+.card img {
     width: 100%;
     height: auto;
-    /* Auto height to maintain aspect ratio */
+    /* Allow the height to adjust based on the image */
+    display: block;
+    margin: 0 auto;
 }
 
-/* Hover effect */
-.blog-entry:hover {
+.card:hover {
     transform: translateY(-3px);
+    cursor: pointer;
 }
 
+/* Responsive styles for small screens */
 @media (max-width: 800px) {
     .main-container {
-        flex-direction: column;
+        display: flex;
     }
+
+    .container {
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: none;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .content {
+        /* Adjust content margin to accommodate sidebar */
+        padding: 3px;
+        overflow: hidden;
+        margin-left: 5px;
+    }
+
 }
