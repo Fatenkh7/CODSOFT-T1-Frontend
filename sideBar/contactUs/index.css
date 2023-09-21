@@ -15,7 +15,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #240046;
+    background-color: #420679;
     padding-top: 20px;
     padding-left: 20px;
     color: #fff;
@@ -70,7 +70,7 @@ body {
 
 
 .toggle-btn {
-    background-color: #2c0452;
+    background-color: #420679;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -82,9 +82,9 @@ body {
 }
 
 #logout-btn {
-    background-color: #370664;
+    background-color: #420679;
     color: #fff;
-    border: 1px solid #8861ac;
+    border-left: 1px solid #ff7a01;
     padding: 10px 20px;
     margin-top: auto;
     font-size: 16px;
@@ -97,4 +97,123 @@ body {
 #logout-btn:hover {
     background-color: #490688;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* .orange {
+    color: #8e43d5;
+} */
+
+.form-container {
+    width: 80%;
+    height: 550px;
+    overflow: hidden;
+    margin: 30px;
+    background-color: #240046;
+    padding: 30px;
+    border-left: 5px solid #ff7a01;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+h1 {
+    display: block;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.form {
+    padding-top: 75px;
+}
+
+.form-container .form .input {
+    color: #ffffff;
+    width: 100%;
+    background-color: #39135d;
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    border-left: 1px solid transparent;
+}
+
+.form-container .form .input:focus {
+    border-left: 5px solid #ff7a01;
+    background-color: #8e43d5;
+}
+
+.form-container .form .textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #39135d;
+    color: #ffffff;
+    font-weight: bold;
+    resize: none;
+    max-height: 150px;
+    margin-bottom: 20px;
+    border-left: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-container .form .textarea:focus {
+    border-left: 5px solid #ff7a01;
+}
+
+.form-container .form .button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.form-container .form .button-container .send-button {
+    flex-basis: 70%;
+    background: #8300ff;
+    padding: 10px;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-container .form .button-container .send-button:hover {
+    background: transparent;
+    border: 1px solid #c000ff;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.form-container .form .button-container .reset-button-container {
+    filter: drop-shadow(1px 1px 0px #8e43d5);
+    flex-basis: 30%;
+}
+
+.form-container .form .button-container .reset-button-container .reset-button {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    background: #240046;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    transition: all 0.2s ease-in-out;
+    width: 200px;
+    border: 2px solid #ff7a01;
+}
+
+.form-container .form .button-container .reset-button-container .reset-button:hover {
+    background: #8300ff;
+    color: white;
+    cursor: pointer;
+}
+
+input::placeholder {
+    color: rgb(255, 255, 255);
+}
+
+textarea::placeholder {
+    color: rgb(255, 255, 255);
 }

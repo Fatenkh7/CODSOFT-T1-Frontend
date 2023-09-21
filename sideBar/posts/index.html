@@ -13,14 +13,25 @@
     </script>
     <div class="main-container">
         <div class="sidebar" style="display: none;">
-            <h1>BLOGS</h1>
+            <h1>Your Posts</h1>
             <ul>
                 <li><a href="../homePage/index.html">Home</a></li>
                 <li><a href="../blogs/index.html">Blogs</a></li>
-                <li><a href="./index.html">Posts</a></li>
-                <li><a href="../pages/index.html">Pages</a></li>
+                <li><a href="../posts/index.html">Posts</a></li>
+                <li class="has-submenu">
+                    <span class="submenu-toggle">Pages ▼</span>
+                    <ul class="submenu">
+                        <li><a href="../pages/travel/index.html">Travel</a></li>
+                        <li><a href="../pages/movies/index.html">Movies</a></li>
+                        <li><a href="../pages/lifeStyle/index.html">Lifestyle</a></li>
+                        <li><a href="../pages/games/index.html">Games</a></li>
+                        <li><a href="../pages/design/index.html">Design</a></li>
+                    </ul>
+                </li>
                 <li><a href="../contactUs/index.html">Contact</a></li>
             </ul>
+
+
             <div class="sidebar-footer">
                 <button id="logout-btn">LOGOUT</button>
             </div>
@@ -29,7 +40,21 @@
         <div class="content" style="margin-left: 0;">
             <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
             <div class="blog-entry">
-                <h1>List of Blogs</h1>
+                <div class="header-post">
+                    <h1>List of Blogs</h1>
+                    <button class="add-b" onclick="OpenCard()">+</button>
+                    <div id="add-blog-card" style="display: none;">
+                        <form id="blog-form">
+                            <input type="text" id="title" placeholder="Title">
+                            <input type="text" id="description" placeholder="Description">
+                            <select id="category-dropdown" placeholder="Category">
+                                <option id="category"></option>
+                            </select>
+                            <input type="file" id="image" placeholder="Image URL">
+                            <button type="submit">Add Blog</button>
+                        </form>
+                    </div>
+                </div>
                 <div class="container" id="blog-list"></div>
             </div>
         </div>

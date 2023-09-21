@@ -35,3 +35,49 @@ async function checkAuthentication() {
 
 // Run the authentication check when the page loads
 window.onload = checkAuthentication;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const contactForm = document.getElementById("contact-form");
+    const authToken = localStorage.getItem("auth-token");
+    contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        try {
+            var firstName = document.getElementById("firstName-c").value.trim();
+            var lastName = document.getElementById("lastName-c").value.trim();
+            var email = document.getElementById("email-c").value.trim();
+            var message = document.getElementById("message-c").value.trim();
+
+            if (!email || !message || !firstName || !lastName) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            const response = await fetch("https://blog-backend-6b5y.onrender.com/contact/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: authToken,
+                },
+                body: JSON.stringify({ email, message, firstName, lastName }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to submit the form");
+            }
+
+            const result = await response.json();
+            console.log("resssssss", result);
+
+            if (result) {
+                alert("Message sent successfully!");
+                contactForm.reset();
+            } else {
+                alert("Message submission failed.");
+            }
+        } catch (error) {
+            console.error("Error:", error.message);
+            alert("An error occurred while submitting the form.");
+        }
+    });
+});
