@@ -35,15 +35,12 @@ async function checkAuthentication() {
 
 // Run the authentication check when the page loads
 window.onload = checkAuthentication;
+//let equal = blog.idCategory.name == "travel";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOM is fully loaded");
     try {
-        // Retrieve the user ID from local storage
-        // const userId = localStorage.getItem("user-id");
-
-        // Get the authentication token from localStorage
         const authToken = localStorage.getItem("auth-token");
         const blogList = document.getElementById("blog-list");
 
@@ -58,18 +55,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const data = await response.json();
-        console.log("dataaaa", data.data)
-
+        console.log("dataaaa", data.data);
 
         if (data.success && data.data.length > 0) {
-            data.data.forEach((blog) => {
-                console.log(blog)
-                let equal = blog.idCategory.name == "design";
+            for (const blog of data.data) {
+                let equal = blog.idCategory.name === "design";
 
                 // Create a container div for each blog entry with a "card" class
                 if (equal) {
-                    console.log("nameee", blog.idCategory.name)
-                    console.log("eqqqq", equal)
+                    console.log("nameee", blog.idCategory.name);
+                    console.log("eqqqq", equal);
 
                     const blogEntry = document.createElement("div");
                     blogEntry.classList.add("card"); // Add the "card" class
@@ -79,6 +74,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const blogTitle = document.createElement("h2");
                     const blogDescription = document.createElement("p");
                     const blogImage = document.createElement("img");
+                    const commentsSection = document.createElement("div");
+                    commentsSection.classList.add("comments-section");
 
                     // Set content and attributes for each element
                     blogTitle.textContent = blog.title;
@@ -89,8 +86,41 @@ document.addEventListener("DOMContentLoaded", async () => {
                     blogEntry.appendChild(blogImage);
                     blogEntry.appendChild(blogTitle);
                     blogEntry.appendChild(blogDescription);
+                    blogEntry.appendChild(commentsSection);
+
+                    // Fetch comments for the specific blog post
+                    const commentsResponse = await fetch(`https://blog-backend-6b5y.onrender.com/comment?blogId=${blog._id}`, {
+                        headers: {
+                            Authorization: authToken,
+                        },
+                    });
+
+                    if (commentsResponse.ok) {
+                        console.log("commmmmmmmmmm", commentsResponse.ok);
+                        const commentsData = await commentsResponse.json();
+                        console.log("comentsss", commentsData.data);
+                        // Display the fetched comments in the comments section
+                        if (commentsData && commentsData.data.length > 0) {
+                            commentsData.data.forEach((comment) => {
+                                console.log("commm", comment.idBlog._id);
+                                console.log("equall", blog._id);
+                                let eqaulComment = comment.idBlog._id == blog._id;
+                                console.log("equalloo", eqaulComment);
+                                if (eqaulComment) {
+                                    const commentElement = document.createElement("div");
+                                    commentElement.classList.add("comment");
+                                    commentElement.textContent = comment.comment;
+                                    commentsSection.appendChild(commentElement);
+                                }
+                            });
+                        } else {
+                            commentsSection.textContent = "No comments found.";
+                        }
+                    } else {
+                        commentsSection.textContent = "Failed to fetch comments.";
+                    }
                 }
-            });
+            }
         } else {
             const errorMessage = document.createElement("p");
             errorMessage.textContent = "No blogs found.";

@@ -36,14 +36,10 @@ async function checkAuthentication() {
 // Run the authentication check when the page loads
 window.onload = checkAuthentication;
 
-
+// ... (your existing functions)
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOM is fully loaded");
     try {
-        // Retrieve the user ID from local storage
-        // const userId = localStorage.getItem("user-id");
-
-        // Get the authentication token from localStorage
         const authToken = localStorage.getItem("auth-token");
         const blogList = document.getElementById("blog-list");
 
@@ -58,39 +54,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const data = await response.json();
-        console.log("dataaaa", data.data)
-
 
         if (data.success && data.data.length > 0) {
-            data.data.forEach((blog) => {
-                console.log(blog)
-                let equal = blog.idCategory.name == "travel";
+            for (const blog of data.data) {
+                let equal = blog.idCategory.name === "travel";
 
-                // Create a container div for each blog entry with a "card" class
                 if (equal) {
-                    console.log("nameee", blog.idCategory.name)
-                    console.log("eqqqq", equal)
-
                     const blogEntry = document.createElement("div");
-                    blogEntry.classList.add("card"); // Add the "card" class
+                    blogEntry.classList.add("card");
                     blogList.appendChild(blogEntry);
 
-                    // Create elements for each blog entry
                     const blogTitle = document.createElement("h2");
                     const blogDescription = document.createElement("p");
                     const blogImage = document.createElement("img");
+                    const commentsSection = document.createElement("div");
+                    commentsSection.classList.add("comments-section");
 
-                    // Set content and attributes for each element
                     blogTitle.textContent = blog.title;
                     blogDescription.textContent = blog.description;
                     blogImage.src = `https://blog-backend-6b5y.onrender.com/${blog.image}`;
+                    const addCommentButton = document.createElement("button");
+                    addCommentButton.textContent = "Comments";
+                    addCommentButton.addEventListener("click", () => {
+                        showCommentCard(blog._id);
+                    });
 
-                    // Append the elements to the blog entry container
                     blogEntry.appendChild(blogImage);
                     blogEntry.appendChild(blogTitle);
                     blogEntry.appendChild(blogDescription);
+                    blogEntry.appendChild(commentsSection);
+                    blogEntry.appendChild(addCommentButton);
                 }
-            });
+            }
         } else {
             const errorMessage = document.createElement("p");
             errorMessage.textContent = "No blogs found.";
@@ -100,3 +95,90 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error:", error);
     }
 });
+
+function showCommentCard(blogId) {
+    const commentPopup = document.getElementById("comment-popup");
+    commentPopup.style.display = "block";
+
+    // Fetch and display comments for the selected blog
+    fetchCommentsForBlog(blogId);
+
+    // Create a container for comments above the input
+    const commentsContainer = document.getElementById("comments-container");
+
+    // Create an input element for adding comments
+    const commentInput = document.getElementById("comment-input");
+    commentInput.value = ""; // Clear any previous input
+    commentInput.placeholder = "Enter your comment";
+}
+
+
+async function fetchCommentsForBlog(blogId) {
+    const authToken = localStorage.getItem("auth-token");
+    const commentsSection = document.getElementById("comments-section");
+
+    try {
+        const commentsResponse = await fetch(`https://blog-backend-6b5y.onrender.com/comment`, {
+            headers: {
+                Authorization: authToken,
+            },
+        });
+
+        if (commentsResponse.ok) {
+            const commentsData = await commentsResponse.json();
+            console.log("commmmm", commentsData)
+
+            if (commentsData && commentsData.data.length > 0) {
+                commentsData.data.forEach((comment) => {
+                    console.log("commentss", comment)
+                    let equalComment = comment.idBlog._id == blogId;
+                    console.log("eqqqqq", equalComment)
+                    if (equalComment) {
+                        const userComment = document.getElementById("user-comment");
+                        const commentElement = document.getElementById("comment");
+                        userComment.textContent = comment.idUser.userName
+                        commentElement.textContent = comment.comment;
+                        commentsSection.appendChild(userComment)
+                        commentsSection.appendChild(commentElement);
+                    }
+                });
+            } else {
+                commentsSection.textContent = "No comments found.";
+            }
+        } else {
+            commentsSection.textContent = "Failed to fetch comments.";
+        }
+    } catch (error) {
+        console.error("Error fetching comments:", error);
+    }
+}
+
+function hideCommentCard() {
+    const commentPopup = document.getElementById("comment-popup");
+    commentPopup.style.display = "none";
+}
+
+
+
+// function addComment(blogId) {
+//     const authToken = localStorage.getItem("auth-token");
+//     const userId = localStorage.getItem("user-id");
+
+//     // Get the comment from the textarea
+//     const comment = document.getElementById("comment-input").value.trim();
+
+//     try {
+//         const response = fetch(`https://blog-backend-6b5y.onrender.com/comment/add`, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 Authorization: authToken,
+//             },
+//             body: JSON.stringify({ comment, idBlog: blogId, idUser: userId }),
+//         });
+
+//         // Rest of your addComment function...
+//     } catch (error) {
+//         console.error("Error:", error);
+//     }
+// }

@@ -36,6 +36,8 @@ async function checkAuthentication() {
 // Run the authentication check when the page loads
 window.onload = checkAuthentication;
 
+//comments
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOM is fully loaded");
@@ -46,6 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Get the authentication token from localStorage
         const authToken = localStorage.getItem("auth-token");
         const blogList = document.getElementById("blog-list");
+        const noBlog = document.getElementById("no-blog");
 
         const response = await fetch(`https://blog-backend-6b5y.onrender.com/blog`, {
             headers: {
@@ -58,21 +61,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const data = await response.json();
+        let hasPosts = false; // Flag to check if there are matching blog posts
 
         if (data.success && data.data.length > 0) {
-            data.data.forEach((blog) => {
+            for (const blog of data.data) {
                 let equal = blog.idUser._id == userId;
-                // Create a container div for each blog entry with a "card" class
-                if (equal) {
 
+                if (equal) {
+                    // Create a container div for each blog entry with a "card" class
                     const blogEntry = document.createElement("div");
                     blogEntry.classList.add("card"); // Add the "card" class
-                    blogList.appendChild(blogEntry);
 
                     // Create elements for each blog entry
                     const blogTitle = document.createElement("h2");
                     const blogDescription = document.createElement("p");
                     const blogImage = document.createElement("img");
+                    const commentsSection = document.createElement("div");
+                    commentsSection.classList.add("comments-section");
 
                     // Set content and attributes for each element
                     blogTitle.textContent = blog.title;
@@ -83,17 +88,61 @@ document.addEventListener("DOMContentLoaded", async () => {
                     blogEntry.appendChild(blogImage);
                     blogEntry.appendChild(blogTitle);
                     blogEntry.appendChild(blogDescription);
+                    blogEntry.appendChild(commentsSection);
+
+                    // Fetch comments for the specific blog post
+                    const commentsResponse = await fetch(`https://blog-backend-6b5y.onrender.com/comment`, {
+                        headers: {
+                            Authorization: authToken,
+                        },
+                    });
+
+                    if (commentsResponse.ok) {
+                        const commentsData = await commentsResponse.json();
+                        console.log("dataaaaaaaaa", commentsData.data)
+                        // Display the fetched comments in the comments section
+                        if (commentsData && commentsData.data.length > 0) {
+                            commentsData.data.forEach((comment) => {
+                                console.log("commm", comment.idBlog._id)
+                                console.log("equall", blog._id)
+                                let eqaulComment = comment.idBlog._id == blog._id
+                                console.log("equalloo", eqaulComment)
+                                if (eqaulComment) {
+                                    const commentElement = document.createElement("div");
+                                    commentElement.classList.add("comment");
+                                    commentElement.textContent = comment.comment;
+                                    commentsSection.appendChild(commentElement);
+                                }
+                            });
+                        } else {
+                            commentsSection.textContent = "No comments found.";
+                        }
+                    } else {
+                        commentsSection.textContent = "Failed to fetch comments.";
+                    }
+
+                    // Append the blog entry to the container
+                    blogList.appendChild(blogEntry);
+
+                    hasPosts = true; // Set the flag to true if there are matching blog posts
                 }
-            });
-        } else {
-            const errorMessage = document.createElement("p");
-            errorMessage.textContent = "No blogs found.";
-            blogList.appendChild(errorMessage);
+            }
+        }
+
+        // Check if there are no matching blog posts
+        if (!hasPosts) {
+            const noData = document.createElement("div");
+            const h1Element = document.createElement("h1");
+            h1Element.textContent = "No posts";
+            noData.appendChild(h1Element);
+            noBlog.appendChild(noData);
         }
     } catch (error) {
         console.error("Error:", error);
     }
 });
+
+
 
 function OpenCard() {
     const addBlogCard = document.getElementById("add-blog-card");
@@ -191,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 blogForm.reset();
                 const addBlogCard = document.getElementById("add-blog-card");
                 addBlogCard.style.display = "none";
+                window.location.reload()
             } else {
                 localStorage.removeItem("selected-category-id");
                 alert("Blog submission failed.");

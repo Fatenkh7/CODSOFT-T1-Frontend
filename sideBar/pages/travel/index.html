@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <script src="./index.js">
-    </script>
+    <script src="./index.js"></script>
     <div class="main-container">
         <div class="sidebar" style="display: none;">
             <h1>Travel Blogs</h1>
@@ -31,17 +30,27 @@
                 <li><a href="../../contactUs/index.html">Contact</a></li>
             </ul>
 
-
             <div class="sidebar-footer">
                 <button id="logout-btn">LOGOUT</button>
             </div>
-
         </div>
         <div class="content" style="margin-left: 0;">
             <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
             <div class="blog-entry">
-                <h1>List of Blogs</h1>
-                <div class="container" id="blog-list"></div>
+                <h1>Travel of Blogs</h1>
+                <div class="container" id="blog-list">
+                </div>
+                <div id="comment-popup" class="popup">
+                    <div id="comment-card" class="popup-content">
+                        <div id="comments-container">
+                            <h5 id="user-comment"></h5>
+                            <span id="comment"></span>
+                        </div>
+                        <textarea id="comment-input" placeholder="Enter your comment"></textarea>
+                        <button onclick="addComment()">Submit Comment</button>
+                        <button onclick="hideCommentCard()">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
