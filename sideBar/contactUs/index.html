@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <title>Contact-US</title>
+</head>
+
+<body>
+    <script src="./index.js">
+    </script>
+    <div class="container">
+        <div class="sidebar" style="display: none;">
+            <h1>Blogs</h1>
+            <ul>
+                <li><a href="../blogs/index.html">Blogs</a></li>
+                <li><a href="../posts/index.html">Posts</a></li>
+                <li class="has-submenu">
+                    <span class="submenu-toggle">Pages ▼</span>
+                    <ul class="submenu">
+                        <li><a href="../pages/travel/index.html">Travel</a></li>
+                        <li><a href="../pages/movies/index.html">Movies</a></li>
+                        <li><a href="../pages/lifeStyle/index.html">Lifestyle</a></li>
+                        <li><a href="../pages/games/index.html">Games</a></li>
+                        <li><a href="../pages/design/index.html">Design</a></li>
+                    </ul>
+                </li>
+                <li><a href="../contactUs/index.html">Contact</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logout-btn">LOGOUT</button>
+            </div>
+        </div>
+        <div class="content" style="margin-left: 0;">
+            <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
+            <div class="form-container">
+                <h1>Contact-US</h1>
+                <form id="contact-form" class="form">
+                    <input type="text" id="firstName-c" name="firstName" class="input" required
+                        placeholder="First Name" />
+                    <input type="text" id="lastName-c" name="lastName" class="input" required placeholder="Last Name" />
+                    <input type="email" id="email-c" name="email" class="input" required placeholder="Email" />
+                    <textarea id="message-c" name="message" class="textarea" required
+                        placeholder="Your Message"></textarea>
+                    <div class="button-container">
+                        <button type="submit" class="send-button">Submit</button>
+                        <div class="reset-button-container">
+                            <button type="reset" id="reset-btn" class="reset-button">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

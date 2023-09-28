@@ -10,51 +10,60 @@
 
 <body>
     <script src="./index.js"></script>
+    <div class="main">
+        <div id="login-form" style="display: block;">
+            <h1>Login</h1>
+            <form method="post" onsubmit="validateLoginForm(event)">
+                <label>Email
+                    <input type="email" name="email" id="email-l" class="email-login" placeholder="Email"
+                        required="required" />
+                </label>
+                <label>Password
+                    <input type="password" name="password" id="password-l" class="password-login" placeholder="Password"
+                        required="required" />
+                </label>
+                <button type="submit" class="btn-login">Login</button>
+                <div id="responseMessage"></div>
+            </form>
+        </div>
 
-    <div>
-        <button onclick="showLoginForm()">SIGN IN</button>
-        <button onclick="showSignUpForm()">SIGN UP</button>
+        <div id="signUp-form" style="display: none;">
+            <h1>Sign Up</h1>
+            <form method="post" onsubmit="validateSignUpForm(event)">
+                <label>FirstName
+                    <input type="text" name="firstName" id="firstName-sUp" placeholder="FirstName"
+                        required="required" /></label>
+                <label>LastName
+                    <input type="text" name="lastName" id="lastName-sUp" placeholder="LastName"
+                        required="required" /></label>
+                <label>Email
+                    <input type="email" name="email" id="email-sUp" placeholder="Email" required="required" /></label>
+                <label>Phone
+                    <input type="telephone" name="phone" id="phone-sUp" placeholder="Phone"
+                        required="required" /></label>
+                <label>Username
+                    <input type="text" name="userName" id="userName-sUp" placeholder="Username"
+                        required="required" /></label>
+                <label>Password
+                    <input type="password" name="password" id="password-sUp" placeholder="Password"
+                        required="required" /></label>
+                <button type="submit" class="btn-register">Register</button>
+            </form>
+        </div>
+
+        <div class="button-container">
+            <div id="btn-lg" onclick="showLoginForm()" style="display: none;">
+                <span>If you already have an account</span>
+                <button>SIGN IN</button>
+            </div>
+            <div id="btn-rg" onclick="showSignUpForm()">
+                <span>If you don't have an account</span>
+                <button>SIGN UP</button>
+            </div>
+        </div>
+
+
     </div>
-
-    <div id="login-form" style="display: none;">
-        <h1>Login</h1>
-        <form method="post" onsubmit="validateLoginForm(event)">
-            <label>Email
-                <input type="email" name="email" id="email-l" class="email-login" placeholder="Email"
-                    required="required" />
-            </label>
-            <label>Password
-                <input type="password" name="password" id="password-l" class="password-login" placeholder="Password"
-                    required="required" />
-            </label>
-            <button type="submit" class="btn-login">Login</button>
-            <div id="responseMessage"></div>
-        </form>
-    </div>
-
-    <div id="signUp-form" style="display: none;">
-        <h1>Sign Up</h1>
-        <form method="post" onsubmit="validateSignUpForm(event)">
-            <label>FirstName
-                <input type="text" name="firstName" id="firstName-sUp" placeholder="FirstName"
-                    required="required" /></label>
-            <label>LastName
-                <input type="text" name="lastName" id="lastName-sUp" placeholder="LastName"
-                    required="required" /></label>
-            <label>Email
-                <input type="email" name="email" id="email-sUp" placeholder="Email" required="required" /></label>
-            <label>Phone
-                <input type="telephone" name="phone" id="phone-sUp" placeholder="Phone" required="required" /></label>
-            <label>Username
-                <input type="text" name="userName" id="userName-sUp" placeholder="Username"
-                    required="required" /></label>
-            <label>Password
-                <input type="password" name="password" id="password-sUp" placeholder="Password"
-                    required="required" /></label>
-            <button type="submit" class="btn-register">Register</button>
-        </form>
-    </div>
-
 </body>
 
 </html>

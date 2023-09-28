@@ -1,0 +1,399 @@
+/* Reset styles */
+body,
+h2,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styles */
+body {
+    background-color: #eee;
+}
+
+/* Sidebar styles */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #420679;
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+
+/* Sidebar header styles */
+.sidebar h1 {
+    text-align: center;
+}
+
+/* Sidebar menu styles */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li,
+span {
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    font-size: 20px;
+    padding: 15px 0;
+}
+
+#submenu-toggle {
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s;
+    font-size: 20px;
+    padding: 15px 0;
+}
+
+#submenu-toggle:hover {
+    cursor: pointer;
+    background-color: #490688;
+    border-radius: 5px;
+    margin-right: 15px;
+    padding-left: 80px;
+    padding-right: 80px;
+
+}
+
+#submenu {
+    flex-direction: column;
+    margin-left: 55px;
+}
+
+
+#submenu-toggle a {
+    padding: 5px 1px;
+    margin-right: 80px;
+    text-align: left;
+    font-size: 17px;
+}
+
+.sidebar a:hover,
+.sidebar a.clicked {
+    background-color: #490688;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+/* Sidebar footer styles */
+.sidebar-footer {
+    text-align: center;
+    padding: 10px;
+}
+
+/* Content styles */
+.content {
+    margin-left: 250px;
+    /* Adjust content margin to accommodate sidebar */
+    padding: 20px;
+}
+
+/* Toggle button styles */
+.toggle-btn {
+    background-color: #420679;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Logout button styles */
+#logout-btn {
+    background-color: #420679;
+    color: #fff;
+    border-left: 1px solid #ff7a01;
+    padding: 10px 20px;
+    margin-top: auto;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.toggle-btn:hover,
+#logout-btn:hover {
+    background-color: #490688;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-search {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-container {
+    margin-right: 300px;
+    align-self: center;
+}
+
+#searchInput {
+    border: 2px solid #5b129d;
+    width: 290px;
+    color: black;
+    border-radius: 4px;
+}
+
+.search-container button {
+    background-color: #420679;
+    color: #fff;
+    border-left: 3px solid #ff7a01;
+    padding: 2px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #490688;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* Blog entry styles */
+.card {
+    width: 300px;
+    height: auto;
+    box-sizing: border-box;
+    background: #4206792b;
+    border-bottom: 3px solid #370664;
+    box-shadow: 3px 4px #ff7900;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+    color: #370664;
+}
+
+/* Blog entry title styles */
+.card h2 {
+    font-size: 18px;
+    /* Reduce the font size */
+    font-weight: bold;
+    margin-top: 9px;
+    /* Reduce the margin */
+}
+
+.card p {
+    font-size: 14px;
+    /* Reduce the font size */
+    margin-bottom: 8px;
+    /* Reduce the margin */
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    /* Allow the height to adjust based on the image */
+    display: block;
+    margin: 0 auto;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+/* CSS for the popup container */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #490688;
+    /* Semi-transparent background */
+    z-index: 1;
+}
+
+/* CSS for the popup content (the comment card) */
+.popup-content {
+    background-color: #eee;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    height: 700px;
+    border: 3px solid #490688;
+    border-radius: 21px;
+    display: flex;
+    flex-direction: column;
+    border-left: 8px solid #ff7900;
+}
+
+
+#comments-section {
+    display: flex;
+    /* justify-content: space-between; */
+    /* flex-grow: 1; */
+    height: max-content;
+    flex-direction: column;
+}
+
+.comment-container {
+    border: 2px solid #5b129d0f;
+    margin-top: 11px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 9px;
+}
+
+.comment-container h4 {
+    margin-right: 150px;
+}
+
+#comment {
+    margin-top: 20px;
+    margin-right: 202px;
+    border: 1px solid black;
+    border-radius: 9px;
+    width: 143px;
+    height: 24px;
+    padding-left: 11px;
+}
+
+#container-add-comments {
+    margin-top: 650px;
+    position: fixed;
+    /* Add space between comments and add comment section */
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+}
+
+#comment-input {
+    padding-right: 202px;
+    margin-left: 2px;
+    border: 2px solid #5b129d;
+    /* border-left: 7px solid #ff7a01; */
+    color: black;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    margin-left: 6px;
+    border: 1px solid #ff7a01;
+    border-radius: 3px;
+}
+
+.submit-btn:hover {
+    background-color: #5b129d;
+    color: #eee;
+    margin: 2px;
+    cursor: pointer;
+    border: 1px solid #370664;
+}
+
+.com-title {
+    text-align: left;
+    width: max-content;
+    margin-bottom: 20px;
+    margin-top: -31px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: math;
+}
+
+.comment-btn {
+    border: 2px solid #5b129d;
+    background-color: #420679;
+    color: white;
+    border-radius: 3px;
+    width: max-content;
+
+}
+
+.comment-btn:hover {
+    border: 3px solid #5b129d;
+    background-color: #490688;
+    border-left: 2px solid #ff7900;
+    color: white;
+    cursor: pointer;
+    margin: 3px;
+
+}
+
+#close-btn {
+    margin-left: 431px;
+    background-color: #5b129d;
+    color: #fff;
+    border-left: 1px solid #ff7a01;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 58px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#clos-btn:hover {
+    background-color: #490688;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 800px) {
+    .main-container {
+        display: flex;
+    }
+
+    .container {
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: none;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .content {
+        /* Adjust content margin to accommodate sidebar */
+        padding: 3px;
+        overflow: hidden;
+        margin-left: 5px;
+    }
+
+    /* Responsive styles for the popup on small screens */
+    .popup-content {
+        overflow: hidden;
+        max-width: max-content;
+        max-height: max-content;
+    }
+
+}

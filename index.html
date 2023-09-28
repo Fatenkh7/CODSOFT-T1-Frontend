@@ -10,20 +10,16 @@
 
 <body>
     <script>
-        // function checkAuthentication() {
-        //     const token = localStorage.getItem("auth-token");
-        //     return !!token;
-        // }
+        function openSignPage() {
+            const signPageLink = document.getElementById("sign-page");
 
-        // function showSignPage() {
-        //     document.getElementById("sign-page").style.display = "block";
-        // }
-        // function showSideBarPage() {
-        //     document.getElementById("sideBar-page").style.display = "block";
-        // }
-
+            if (signPageLink) {
+                signPageLink.click();
+            }
+        }
+        window.onload = openSignPage;
     </script>
-    <a href="./sign/index.html" id="sign-page">welcome</a>
+    <a href="./sign/index.html" id="sign-page"></a>
     <a href="./sideBar/index.html" id="sideBar-page"></a>
 </body>
 

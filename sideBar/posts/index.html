@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <title>Posts</title>
+</head>
+
+<body>
+    <script src="./index.js">
+    </script>
+    <div class="main-container">
+        <div class="sidebar" style="display: none;">
+            <h1>Blogs</h1>
+            <ul>
+                <li><a href="../blogs/index.html">Blogs</a></li>
+                <li><a href="../posts/index.html">Posts</a></li>
+                <li class="has-submenu">
+                    <span class="submenu-toggle">Pages ▼</span>
+                    <ul class="submenu">
+                        <li><a href="../pages/travel/index.html">Travel</a></li>
+                        <li><a href="../pages/movies/index.html">Movies</a></li>
+                        <li><a href="../pages/lifeStyle/index.html">Lifestyle</a></li>
+                        <li><a href="../pages/games/index.html">Games</a></li>
+                        <li><a href="../pages/design/index.html">Design</a></li>
+                    </ul>
+                </li>
+                <li><a href="../contactUs/index.html">Contact</a></li>
+            </ul>
+
+
+            <div class="sidebar-footer">
+                <button id="logout-btn">LOGOUT</button>
+            </div>
+
+        </div>
+        <div class="content" style="margin-left: 0;">
+            <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
+            <div class="blog-entry">
+                <div class="header-post">
+                    <h3>Your Posts</h3>
+
+                    <button class="add-b" onclick="toggleAddBlogPopup()">Add Post</button>
+                </div>
+                <div id="add-blog-card" style="display: none;">
+
+                    <form id="blog-form">
+                        <button id="close-add-btn" type="button" onclick="hideBlogCard()">x</button>
+                        <div class="com-title">Add Blog</div>
+                        <div id="content-add-card">
+                            <input type="text" id="title" placeholder="Title">
+                            <input type="text" id="description" placeholder="Description">
+                            <select id="category-dropdown" placeholder="Category">
+                                <option selected> select category</option>
+                                <option id="category"></option>
+                            </select>
+                            <input type="file" id="image" placeholder="Image URL">
+                            <button class="sub-blog" type="submit">Add Blog</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container" id="blog-list">
+                    <div id="no-blog"></div>
+                </div>
+                <div id="comment-popup" class="popup" style="display: none;">
+                    <div id="comment-card" class="popup-content">
+                        <button id="close-btn" onclick="hideCommentCard()">X</button>
+                        <div class="com-title">Comments</div>
+                        <div id="comments-section">
+                        </div>
+                        <div id="container-add-comments">
+                            <textarea id="comment-input" placeholder="Enter your comment"></textarea>
+                            <button class="submit-btn" onclick="addComment()">Submit Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

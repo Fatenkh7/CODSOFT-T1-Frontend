@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../index.css" />
+    <title>design</title>
+</head>
+
+<body>
+    <script src="./index.js">
+    </script>
+    <div class="main-container">
+        <div class="sidebar" style="display: none;">
+            <h1>Design Blogs</h1>
+            <ul>
+                <li><a href="../../blogs/index.html">Blogs</a></li>
+                <li><a href="../../posts/index.html">Posts</a></li>
+                <li class="has-submenu">
+                    <span class="submenu-toggle">Pages ▼</span>
+                    <ul class="submenu">
+                        <li><a href="../travel/index.html">Travel</a></li>
+                        <li><a href="../movies/index.html">Movies</a></li>
+                        <li><a href="../lifeStyle/index.html">Lifestyle</a></li>
+                        <li><a href="../games/index.html">Games</a></li>
+                        <li><a href="../design/index.html">Design</a></li>
+                    </ul>
+                </li>
+                <li><a href="../../contactUs/index.html">Contact</a></li>
+            </ul>
+
+
+            <div class="sidebar-footer">
+                <button id="logout-btn">LOGOUT</button>
+            </div>
+
+        </div>
+        <div class="content" style="margin-left: 0;">
+            <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
+            <div class="blog-entry">
+                <h1>List of Blogs</h1>
+                <div class="container" id="blog-list"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
