@@ -14,12 +14,11 @@
         <div class="sidebar" style="display: none;">
             <h1>Travel Blogs</h1>
             <ul>
-                <li><a href="../../homePage/index.html">Home</a></li>
                 <li><a href="../../blogs/index.html">Blogs</a></li>
                 <li><a href="../../posts/index.html">Posts</a></li>
                 <li class="has-submenu">
-                    <span class="submenu-toggle">Pages ▼</span>
-                    <ul class="submenu">
+                    <span id="submenu-toggle" onclick="subMenuToggle()">Pages</span>
+                    <ul id="submenu" style="display: none;">
                         <li><a href="../travel/index.html">Travel</a></li>
                         <li><a href="../movies/index.html">Movies</a></li>
                         <li><a href="../lifeStyle/index.html">Lifestyle</a></li>
@@ -40,15 +39,16 @@
                 <h1>Travel of Blogs</h1>
                 <div class="container" id="blog-list">
                 </div>
-                <div id="comment-popup" class="popup">
+                <div id="comment-popup" class="popup" style="display: none;">
                     <div id="comment-card" class="popup-content">
-                        <div id="comments-container">
-                            <h5 id="user-comment"></h5>
-                            <span id="comment"></span>
+                        <button id="close-btn" onclick="hideCommentCard()">X</button>
+                        <div class="com-title">Comments</div>
+                        <div id="comments-section">
                         </div>
-                        <textarea id="comment-input" placeholder="Enter your comment"></textarea>
-                        <button onclick="addComment()">Submit Comment</button>
-                        <button onclick="hideCommentCard()">Close</button>
+                        <div id="container-add-comments">
+                            <textarea id="comment-input" placeholder="Enter your comment"></textarea>
+                            <button class="submit-btn" onclick="addComment()">Submit Comment</button>
+                        </div>
                     </div>
                 </div>
             </div>

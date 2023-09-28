@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css" />
     <title>Document</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
 </head>
 
 <body>
@@ -19,7 +22,6 @@
                 sidebar.style.display = 'block';
                 content.style.marginLeft = '262px';
                 toggleBtn.innerText = 'Close Sidebar';
-
             } else {
                 sidebar.style.display = 'none';
                 content.style.marginLeft = '0';
@@ -43,15 +45,21 @@
             document.getElementById("logout-btn").addEventListener("click", logout);
         }
 
-
         // Run the authentication check when the page loads
-        window.onload = checkAuthentication;
+        window.onload = function () {
+            checkAuthentication();
+
+            // Simulate a click on the "Blogs" link
+            const blogsLink = document.querySelector('.sidebar ul li:first-child a');
+            if (blogsLink) {
+                blogsLink.click();
+            }
+        };
     </script>
     <div class="container">
         <div class="sidebar" style="display: none;">
             <h1>BLOGS</h1>
             <ul>
-                <li><a href="./homePage/index.html">Home</a></li>
                 <li><a href="./blogs/index.html">Blogs</a></li>
                 <li><a href="./posts/index.html">Posts</a></li>
                 <li><a href="./pages/index.html">Pages</a></li>
@@ -61,12 +69,6 @@
                 <button id="logout-btn">LOGOUT</button>
             </div>
 
-        </div>
-        <div class="content" style="margin-left: 0;">
-            <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
-            <h1>Main Content</h1>
-            <p>Welcome to the side bar</p>
-            <p>This is the main content of the page. It will fill the remaining space next to the sidebar.</p>
         </div>
     </div>
 </body>

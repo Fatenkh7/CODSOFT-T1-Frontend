@@ -15,6 +15,16 @@ function toggleSidebar() {
     }
 }
 
+function subMenuToggle() {
+    const submenu = document.getElementById("submenu");
+    if (submenu.style.display === 'none' || submenu.style.display === '') {
+        submenu.style.display = 'block';
+    } else {
+        submenu.style.display = 'none';
+    }
+}
+
+
 async function checkAuthentication() {
     const token = localStorage.getItem("auth-token");
     if (!token) {
@@ -36,7 +46,8 @@ async function checkAuthentication() {
 // Run the authentication check when the page loads
 window.onload = checkAuthentication;
 
-// ... (your existing functions)
+let selectedBlogId = null;
+
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOM is fully loaded");
     try {
@@ -74,8 +85,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                     blogDescription.textContent = blog.description;
                     blogImage.src = `https://blog-backend-6b5y.onrender.com/${blog.image}`;
                     const addCommentButton = document.createElement("button");
+                    addCommentButton.classList.add("comment-btn")
                     addCommentButton.textContent = "Comments";
                     addCommentButton.addEventListener("click", () => {
+                        selectedBlogId = blog._id;
                         showCommentCard(blog._id);
                     });
 
@@ -96,12 +109,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-function showCommentCard(blogId) {
+function showCommentCard(selectedBlogId) {
     const commentPopup = document.getElementById("comment-popup");
     commentPopup.style.display = "block";
 
     // Fetch and display comments for the selected blog
-    fetchCommentsForBlog(blogId);
+    fetchCommentsForBlog(selectedBlogId);
 
     // Create a container for comments above the input
     const commentsContainer = document.getElementById("comments-container");
@@ -113,9 +126,12 @@ function showCommentCard(blogId) {
 }
 
 
-async function fetchCommentsForBlog(blogId) {
+async function fetchCommentsForBlog(selectedBlogId) {
     const authToken = localStorage.getItem("auth-token");
     const commentsSection = document.getElementById("comments-section");
+
+    // Clear the existing comments
+    commentsSection.innerHTML = "";
 
     try {
         const commentsResponse = await fetch(`https://blog-backend-6b5y.onrender.com/comment`, {
@@ -130,16 +146,22 @@ async function fetchCommentsForBlog(blogId) {
 
             if (commentsData && commentsData.data.length > 0) {
                 commentsData.data.forEach((comment) => {
-                    console.log("commentss", comment)
-                    let equalComment = comment.idBlog._id == blogId;
-                    console.log("eqqqqq", equalComment)
-                    if (equalComment) {
-                        const userComment = document.getElementById("user-comment");
-                        const commentElement = document.getElementById("comment");
-                        userComment.textContent = comment.idUser.userName
-                        commentElement.textContent = comment.comment;
-                        commentsSection.appendChild(userComment)
-                        commentsSection.appendChild(commentElement);
+                    console.log("commentss", comment);
+                    if (comment.idBlog && comment.idUser) {
+                        let equalComment = comment.idBlog._id == selectedBlogId;
+                        console.log("eqqqqq", equalComment);
+                        if (equalComment) {
+                            const commentContainer = document.createElement("div");
+                            commentContainer.classList.add("comment-container");
+                            const userComment = document.createElement("h3");
+                            const commentElement = document.createElement("h4");
+                            userComment.textContent = comment.idUser.userName;
+                            commentElement.textContent = comment.comment;
+
+                            commentContainer.appendChild(userComment);
+                            commentContainer.appendChild(commentElement);
+                            commentsSection.appendChild(commentContainer);
+                        }
                     }
                 });
             } else {
@@ -153,32 +175,45 @@ async function fetchCommentsForBlog(blogId) {
     }
 }
 
+
+
 function hideCommentCard() {
     const commentPopup = document.getElementById("comment-popup");
     commentPopup.style.display = "none";
+    fetchCommentsForBlog(selectedBlogId);
 }
 
 
+async function addComment(selectedBlogId) {
+    const authToken = localStorage.getItem("auth-token");
+    const userId = localStorage.getItem("user-id");
 
-// function addComment(blogId) {
-//     const authToken = localStorage.getItem("auth-token");
-//     const userId = localStorage.getItem("user-id");
+    // Get the comment from the textarea
+    const commentInput = document.getElementById("comment-input");
+    const comment = commentInput.value.trim();
 
-//     // Get the comment from the textarea
-//     const comment = document.getElementById("comment-input").value.trim();
+    try {
+        const response = await fetch(`https://blog-backend-6b5y.onrender.com/comment/add`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: authToken,
+            },
+            body: JSON.stringify({ comment, idBlog: selectedBlogId, idUser: userId }),
+        });
 
-//     try {
-//         const response = fetch(`https://blog-backend-6b5y.onrender.com/comment/add`, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 Authorization: authToken,
-//             },
-//             body: JSON.stringify({ comment, idBlog: blogId, idUser: userId }),
-//         });
+        if (response.ok) {
+            // Clear the comment input field after successful submission
+            commentInput.value = "";
+            await fetchCommentsForBlog(selectedBlogId);
+            alert("Comment added successfully");
 
-//         // Rest of your addComment function...
-//     } catch (error) {
-//         console.error("Error:", error);
-//     }
-// }
+        } else {
+            alert("Failed to add a comment");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+

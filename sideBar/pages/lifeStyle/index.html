@@ -9,18 +9,16 @@
 </head>
 
 <body>
-    <script src="./index.js">
-    </script>
+    <script src="./index.js"></script>
     <div class="main-container">
         <div class="sidebar" style="display: none;">
             <h1>Life Style Blogs</h1>
             <ul>
-                <li><a href="../../homePage/index.html">Home</a></li>
                 <li><a href="../../blogs/index.html">Blogs</a></li>
                 <li><a href="../../posts/index.html">Posts</a></li>
                 <li class="has-submenu">
-                    <span class="submenu-toggle">Pages ▼</span>
-                    <ul class="submenu">
+                    <span id="submenu-toggle" onclick="subMenuToggle()">Pages</span>
+                    <ul id="submenu" style="display: none;">
                         <li><a href="../travel/index.html">Travel</a></li>
                         <li><a href="../movies/index.html">Movies</a></li>
                         <li><a href="../lifeStyle/index.html">Lifestyle</a></li>
@@ -31,17 +29,28 @@
                 <li><a href="../../contactUs/index.html">Contact</a></li>
             </ul>
 
-
             <div class="sidebar-footer">
                 <button id="logout-btn">LOGOUT</button>
             </div>
-
         </div>
         <div class="content" style="margin-left: 0;">
             <button class="toggle-btn" onclick="toggleSidebar()">Open Sidebar</button>
             <div class="blog-entry">
-                <h1>List of Blogs</h1>
-                <div class="container" id="blog-list"></div>
+                <h1>Travel of Blogs</h1>
+                <div class="container" id="blog-list">
+                </div>
+                <div id="comment-popup" class="popup" style="display: none;">
+                    <div id="comment-card" class="popup-content">
+                        <button id="close-btn" onclick="hideCommentCard()">X</button>
+                        <div class="com-title">Comments</div>
+                        <div id="comments-section">
+                        </div>
+                        <div id="container-add-comments">
+                            <textarea id="comment-input" placeholder="Enter your comment"></textarea>
+                            <button class="submit-btn" onclick="addComment()">Submit Comment</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
