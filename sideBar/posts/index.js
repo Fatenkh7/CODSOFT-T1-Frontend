@@ -31,7 +31,6 @@ async function checkAuthentication() {
         window.location.href = "access-denied.html";
         return;
     }
-    console.log("Token exists:", token);
 
     function logout() {
         localStorage.removeItem("auth-token");
@@ -49,7 +48,6 @@ window.onload = checkAuthentication;
 let selectedBlogId = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
-    console.log("DOM is fully loaded");
     try {
         const authToken = localStorage.getItem("auth-token");
         const userId = localStorage.getItem("user-id")
@@ -151,14 +149,11 @@ async function fetchCommentsForBlog(selectedBlogId) {
 
         if (commentsResponse.ok) {
             const commentsData = await commentsResponse.json();
-            console.log("commmmm", commentsData)
 
             if (commentsData && commentsData.data.length > 0) {
                 commentsData.data.forEach((comment) => {
-                    console.log("commentss", comment);
                     if (comment.idBlog && comment.idUser) {
                         let equalComment = comment.idBlog._id == selectedBlogId;
-                        console.log("eqqqqq", equalComment);
                         if (equalComment) {
                             const commentContainer = document.createElement("div");
                             commentContainer.classList.add("comment-container");
@@ -339,7 +334,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await response.json();
 
-            console.log("Response:", result);
 
             if (result) {
                 localStorage.removeItem("selected-category-id");
