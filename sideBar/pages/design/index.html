@@ -41,6 +41,18 @@
             <div class="blog-entry">
                 <h1>List of Blogs</h1>
                 <div class="container" id="blog-list"></div>
+                <div id="comment-popup" class="popup" style="display: none;">
+                    <div id="comment-card" class="popup-content">
+                        <button id="close-btn" onclick="hideCommentCard()">X</button>
+                        <div class="com-title">Comments</div>
+                        <div id="comments-section">
+                        </div>
+                        <div id="container-add-comments">
+                            <textarea id="comment-input" placeholder="Enter your comment"></textarea>
+                            <button class="submit-btn" onclick="addComment()">Submit Comment</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
