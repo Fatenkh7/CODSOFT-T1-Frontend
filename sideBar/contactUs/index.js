@@ -21,7 +21,6 @@ async function checkAuthentication() {
         window.location.href = "access-denied.html";
         return;
     }
-    console.log("Token exists:", token);
 
     function logout() {
         localStorage.removeItem("auth-token");
@@ -67,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const result = await response.json();
-            console.log("resssssss", result);
 
             if (result) {
                 alert("Message sent successfully!");
