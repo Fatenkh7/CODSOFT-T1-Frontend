@@ -81,6 +81,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const blogImage = document.createElement("img");
                     const commentsSection = document.createElement("div");
                     commentsSection.classList.add("comments-section");
+                    const deleteButton = document.createElement("button");
+                    deleteButton.classList.add("delete-btn");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.addEventListener("click", () => {
+                        selectedBlogId = blog._id;
+                        deleteBlog(selectedBlogId);
+                    });
 
                     blogTitle.textContent = blog.title;
                     blogDescription.textContent = blog.description;
@@ -98,6 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     blogEntry.appendChild(blogDescription);
                     blogEntry.appendChild(commentsSection);
                     blogEntry.appendChild(addCommentButton);
+                    blogEntry.appendChild(deleteButton);
                 }
             }
         } else {
@@ -277,7 +285,7 @@ async function fetchCategories() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const blogForm = document.getElementById("content-add-card");
+    const blogForm = document.getElementById("blog-form");
     const userId = localStorage.getItem("user-id");
 
     // Create a variable to store the selected category ID
@@ -352,3 +360,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+async function deleteBlog(selectedBlogId) {
+    const authToken = localStorage.getItem("auth-token");
+
+    try {
+        const response = await fetch(`https://blog-backend-6b5y.onrender.com/blog/${selectedBlogId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: authToken,
+            },
+        });
+
+        if (response.ok) {
+            // Remove the card from the DOM if the deletion is successful
+            const deletedCard = document.querySelector(`.card[data-blog-id="${selectedBlogId}"]`);
+            if (deletedCard) {
+                deletedCard.remove();
+            }
+
+            alert("Blog deleted successfully!");
+            window.location.reload()
+        } else {
+            alert("Failed to delete the blog");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}

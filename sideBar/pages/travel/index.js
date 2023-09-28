@@ -184,7 +184,7 @@ function hideCommentCard() {
 }
 
 
-async function addComment(selectedBlogId) {
+async function addComment() {
     const authToken = localStorage.getItem("auth-token");
     const userId = localStorage.getItem("user-id");
 
@@ -207,7 +207,6 @@ async function addComment(selectedBlogId) {
             commentInput.value = "";
             await fetchCommentsForBlog(selectedBlogId);
             alert("Comment added successfully");
-
         } else {
             alert("Failed to add a comment");
         }
@@ -215,5 +214,4 @@ async function addComment(selectedBlogId) {
         console.error("Error:", error);
     }
 }
-
 
