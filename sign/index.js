@@ -108,13 +108,21 @@ async function validateSignUpForm(event) {
             window.location.href = "../sideBar/index.html";
         } else {
             const errorResponseData = await response.json();
-            if (errorResponseData && errorResponseData.message) {
-                alert(errorResponseData.message);
+
+            if (errorResponseData && errorResponseData.data) {
+                for (const field in errorResponseData.data) {
+                    if (errorResponseData.data.hasOwnProperty(field)) {
+                        const errorMessage = errorResponseData.data[field].message;
+                        alert(`Validation error for ${field}: ${errorMessage}`);
+                    }
+                }
             } else {
-                window.alert("Registration failed!" + "\n " + "Something wrong!");
+                // Handle unexpected error here
+                window.alert(errorResponseData.message);
             }
         }
     } catch (error) {
+        console.log("errorr", error.message)
         window.alert(error.message);
     }
 }

@@ -389,11 +389,22 @@ span {
         margin-left: 5px;
     }
 
-    /* Responsive styles for the popup on small screens */
     .popup-content {
+        width: 80%;
+        height: 80%;
+    }
+
+    .header-search {
+        width: max-content;
+        gap: 20px;
+    }
+
+    /* Responsive styles for the popup on small screens */
+    /* .popup-content {
         overflow: hidden;
         max-width: max-content;
         max-height: max-content;
-    }
+    } */
+
 
 }
