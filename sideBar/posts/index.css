@@ -436,8 +436,7 @@ input::placeholder {
 
     /* Responsive styles for the popup on small screens */
     .popup-content {
-        overflow: hidden;
-        max-width: max-content;
-        max-height: max-content;
+        width: 80%;
+        height: 80%;
     }
 }
